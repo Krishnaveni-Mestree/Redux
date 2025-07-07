@@ -19,19 +19,27 @@ function orderBurger(){
 }
 
 //Reducer: function which will be taking 2 arguments, initial state and action
-const initialState={
-    //i want to keep track of pizza base
+const initialStateForPizza={
     pizzaBase:100,
+}
+const initialStateForBurger={
     burgerBuns:200
 }
 //reducer func. will return new state based on current state and action
-const reducer=(state=initialState,action)=>{
+const reducerPizza=(state=initialStateForPizza,action)=>{
     switch(action.type){
         case ORDER_PIZZA:
             return{
                 ...state, //have to make copy of state for future use
                 pizzaBase:state.pizzaBase-1
             }
+        default:
+            return state;
+    }
+}
+
+const reducerBurger=(state=initialStateForBurger,action)=>{
+    switch(action.type){
         case ORDER_BURGER:
             return{
                 ...state,
@@ -42,10 +50,9 @@ const reducer=(state=initialState,action)=>{
     }
 }
 
-
 //STORE -ITS 5 RESPONSIBILITIES
 //1- Store needs to hold application state
-const store=createStore(reducer);
+const store=createStore(reducerPizza,reducerBurger);
 
 //2- It exposes a method called getState which gives your application
 //access to the current state in the store
