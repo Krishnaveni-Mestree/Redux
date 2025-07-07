@@ -53,8 +53,8 @@ const reducerBurger=(state=initialStateForBurger,action)=>{
 
 //combining reducers
 const rootReducer=combineReducer({
-    reducerPizza,
-    reducerBurger
+    pizza:reducerPizza,
+    burger:reducerBurger
 })
 
 //STORE -ITS 5 RESPONSIBILITIES
