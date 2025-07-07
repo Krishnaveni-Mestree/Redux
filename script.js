@@ -13,3 +13,21 @@ function orderPizza(){
         shop_name:'Pizza Shop'
     }
 }
+
+//Reducer: function which will be taking 2 arguments, initial state and action
+const initialState={
+    //i want to keep track of pizza base
+    pizzaBase:100
+}
+//reducer func. will return new state based on current state and action
+const reducer=(state=initialState,action)=>{
+    switch(action.type){
+        case ORDER_PIZZA:
+            return{
+                ...state, //have to make copy of state for future use
+                pizzaBase:pizzaBase-1
+            }
+        default:
+            return state;
+    }
+}
