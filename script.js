@@ -1,3 +1,6 @@
+const redux=require('redux');
+const createStore=redux.createStore;
+
 const ORDER_PIZZA='ORDER_PIZZA'
 //Action : Actions are plain javascript objecct
 const action={
@@ -25,9 +28,31 @@ const reducer=(state=initialState,action)=>{
         case ORDER_PIZZA:
             return{
                 ...state, //have to make copy of state for future use
-                pizzaBase:pizzaBase-1
+                pizzaBase:state.pizzaBase-1
             }
         default:
             return state;
     }
 }
+
+
+//STORE -ITS 5 RESPONSIBILITIES
+//1- Store needs to hold application state
+const store=createStore(reducer);
+
+//2- It exposes a method called getState which gives your application
+//access to the current state in the store
+console.log("Intial State :",store.getState());
+
+//3- Registers listeners via subscribe(listener)
+const unSubscribe=store.subscribe(()=>console.log("Updated State :",store.getState()))
+
+//4- Allows state to be updated via dispatch(action)
+store.dispatch(orderPizza())
+store.dispatch(orderPizza())
+
+
+//5- handles unregistering of listeners via the function returned by subscribe(listener)
+unSubscribe()
+store.dispatch(orderPizza())
+store.dispatch(orderPizza()) 
